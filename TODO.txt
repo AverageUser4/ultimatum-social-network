@@ -1,0 +1,33 @@
+- users: 
+  {
+    id: number,
+    name: string,
+    password: string,
+    description: string,
+  }
+- posts: 
+  {
+    id: number,
+    authorId: number,
+    title: string,
+    content: string,
+  }
+
+- landing page:
+  - '/' and '/home':
+    - if user is logged in it promts them to check out posts / other users
+    - else it prompts them to login / register
+
+- posts page:
+  - '/posts': 
+    - shows all posts from newest to oldest
+  - '/posts/:id':
+    - shows particular post
+
+- users page:
+  - '/users':
+    - shows name of every user and link to profile
+    - allows for searching for user: '/users?search=<user_name>'
+  - '/users/:id':
+    - page of particular user, contains description and posts by that user
+

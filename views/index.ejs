@@ -1,0 +1,15 @@
+<h1>Welcome to Ultimatum - The Ultimate Social Network</h1>
+<% if(!locals.user) { %>
+  <p>
+    You finally arrived... The place everyone is talking about - Ultimatum - is
+    waiting for you to join.
+  </p>
+  
+  <a href="/login">Log in</a>
+  <a href="/register">Register</a>
+<% } else { %>
+  <p>
+    Welcome back, <%= locals.user %>!
+    Checkout our <a href="/posts">posts</a> or <a href="/users">users</a>.
+  </p>
+<% } %>

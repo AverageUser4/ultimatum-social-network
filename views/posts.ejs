@@ -1,0 +1,21 @@
+<h1>Ultimatum - Posts</h1>
+
+<form class="post-form" method="post">
+  <input name="title" placeholder="title">
+  <textarea name="content" placeholder="what are you thinking about..."></textarea>
+  <button>add post</button>
+  <% if(locals.error) { %>
+    <p class="error"><%= locals.error %></p>
+  <% } %>
+  <% if(locals.success) { %>
+    <p class="success"><%= locals.success %></p>
+  <% } %>
+</form>
+
+<% if(locals.posts) { %>
+  <% locals.posts.forEach((post) => { %>
+    <%- include('_post', { post }) %>
+  <% }); %>
+<% } else { %>
+  <p class="error">No posts found. Please contact our admin, this has to be mistake - our website is very popular!</p>
+<% } %>

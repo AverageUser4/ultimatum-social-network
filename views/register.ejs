@@ -1,0 +1,19 @@
+<h1>Ultimatum - Create Account</h1>
+
+<% if(locals.user) { %>
+  <h2>You are logged in, <%= locals.user %>!</h2>
+  <p>Come see our cool <a href="/posts">posts</a> or <a href="/users">users</a></p>
+<% } else { %>
+  <form method="post">
+    <input name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <input type="password" name="passwordRepeat" placeholder="repeat password">
+    <button>submit</button>
+  </form>
+
+  <% if(locals.error) { %>
+    <p class="error"><%= locals.error %></p>
+  <% } %>
+
+  <p>Already have an account? <a href="/login">Log in</a>.</p>
+<% } %>

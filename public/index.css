@@ -1,0 +1,52 @@
+* {
+  color-scheme: dark;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  padding: 16px;
+
+  background-color: royalblue;
+}
+
+main {
+  min-height: 100vh;
+
+  padding: 16px;
+  
+  box-sizing: border-box;
+}
+
+footer {
+  padding: 16px;
+  
+  background-color: darkcyan;
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.post {
+  padding: 16px;
+  margin: 32px 0;
+
+  border: 2px solid goldenrod;
+}
+
+.post-form {
+  display: grid;
+}
