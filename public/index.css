@@ -50,3 +50,9 @@ footer {
 .post-form {
   display: grid;
 }
+
+.user {
+  margin: 32px 0;
+  background-color: rebeccapurple;
+  padding: 4px 32px;
+}

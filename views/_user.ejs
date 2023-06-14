@@ -1,0 +1,4 @@
+<div class="user">
+  <h3><a href="users/<%= locals.user.id %>"><%= locals.user.name || 'Deleted user' %></a></h3>
+  <p><%= (locals.user.description.slice(0, 16) || 'No description') + '...' %></p>
+</div>

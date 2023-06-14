@@ -1,5 +1,5 @@
 <div class="post">
   <h3><%= locals.post.title %></h3>
-  <p><%= locals.post.content%></p>
-  <p>By: <%= locals.post.author %></p>
+  <p><%= locals.post.content %></p>
+  <p>By: <a href="/users/<%= locals.post.authorId %>"><%= locals.post.author %></a></p>
 </div>

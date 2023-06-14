@@ -9,8 +9,13 @@ class DataBase {
     return this.posts.find(post => post.id === id);
   }
 
+  getPostsByUser(id) {
+    id = Number(id);
+    return this.getFormattedPosts().filter(post => post.authorId === id).reverse();
+  }
+
   getFormattedPosts() {
-    return this.posts.map(post => ({ ...post, author: this.getUserById(post.authorId)?.name || 'Unknown author' }));
+    return this.posts.map(post => ({ ...post, author: this.getUserById(post.authorId)?.name || 'Unknown author' })).reverse();
   }
 
   addPost(authorId, title, content) {
@@ -44,11 +49,16 @@ class DataBase {
   }
 
   getUserById(id) {
+    id = Number(id);
     return this.users.find(user => user.id === id);
   }
 
   hasUser(name) {
     return Boolean(this.getUser(name));
+  }
+
+  getFormattedUsers() {
+    return this.users;
   }
 }
 

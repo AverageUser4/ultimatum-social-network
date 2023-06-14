@@ -1,0 +1,10 @@
+<h1><%= locals.data.name %></h1>
+<p><%= locals.data.description %></p>
+
+<% if(locals.posts?.length) { %>
+  <% locals.posts.forEach(post => { %>
+    <%- include('_post', { post }) %>    
+  <% }) %>
+<% } else { %>
+  <p class="error">This user has no posts!</p>
+<% } %>

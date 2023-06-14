@@ -7,8 +7,9 @@ const PORT = Number(process.env.PORT) || 3000;
 const rootRouter = require('./routes/root');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
-const postsRouter = require('./routes/posts');
 const logoutRouter = require('./routes/logout');
+const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -24,8 +25,9 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/posts', postsRouter);
+app.use('/users', usersRouter);
 app.use((req, res) => {
-  res.render('_template', { main: '404' });
+  res.render('_template', { main: '404', user: req.session.user });
 });
 
 // create example user and post

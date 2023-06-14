@@ -5,14 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ultimatum | <%= locals.title %></title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
 <body>
   
   <header>
     <a href="/">ULTIMATUM</a>
     <% if(locals.user) { %>
+      <div>
+        <a href="/">Home</a>
+        <a href="/posts">Posts</a>
+        <a href="/users">Users</a>
+      </div>
       <a href="/logout">Log out</a>
+    <% } else { %>
+      <div>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+      </div>
     <% } %>
   </header>
 

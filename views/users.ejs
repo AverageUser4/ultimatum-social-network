@@ -1,0 +1,9 @@
+<h1>Ultimatum - Users</h1>
+
+<% if(locals.users) { %>
+  <% locals.users.forEach((user) => { %>
+    <%- include('_user', { user }) %>
+  <% }); %>
+<% } else { %>
+  <p class="error">No users found. Please contact our admin, this has to be mistake - our website is very popular!</p>
+<% } %>
