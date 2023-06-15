@@ -3,8 +3,8 @@ function loginUser(user, req, callback) {
     if(err) {
       console.error(err);
     }
-    req.session.user = user.name;
-    req.session.userId = user.id;
+    req.session.authUser = user.name;
+    req.session.authUserId = user.id;
     callback();
   });
 }

@@ -27,4 +27,9 @@ postSchema.statics.addPost = async function(author, title, content) {
   }
 }
 
+postSchema.statics.findPostsByAuthorId = async function(id) {
+  const posts = await this.where({ author: id }).populate('author');
+  return posts;
+}
+
 module.exports = mongoose.model('Post', postSchema);

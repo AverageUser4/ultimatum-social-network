@@ -29,7 +29,7 @@ app.use('/logout', logoutRouter);
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
 app.use((req, res) => {
-  res.render('404', { user: req.session.user });
+  res.render('404', { user: req.session.authUser });
 });
 
 const dbLink = 'mongodb://127.0.0.1/expressApp';

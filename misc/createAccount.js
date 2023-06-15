@@ -20,7 +20,7 @@ async function createAccount(username, password, passwordRepeat, callback) {
           console.error(err);
           callback(false, 'Internal server error. Please try again later');
         } else {
-          db.addUser(username, '', hash, salt)
+          User.addUser(username, '', hash, salt)
             .then(user => callback(true, null, user));
         }
       });
