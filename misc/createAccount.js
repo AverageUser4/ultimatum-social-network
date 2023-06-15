@@ -1,7 +1,7 @@
 const hasher = require('pbkdf2-password')();
-const db = require('./database');
+const User = require('../schemas/User');
 
-function createAccount(username, password, passwordRepeat, callback) {  
+async function createAccount(username, password, passwordRepeat, callback) {  
   if(username.includes(' ')) {
     callback(false, 'Username cannot contain any space characters.');
   } else if(username.length < 3) {
@@ -11,7 +11,7 @@ function createAccount(username, password, passwordRepeat, callback) {
   } else if(password.length < 3) {
     callback(false, 'Password has to consist of at least 3 characters.');
   } else {
-    const user = db.getUser(username);
+    const user = await User.findByName(username);
     if(user) {
       callback(false, 'User with that username already exists!');
     } else {
@@ -20,8 +20,8 @@ function createAccount(username, password, passwordRepeat, callback) {
           console.error(err);
           callback(false, 'Internal server error. Please try again later');
         } else {
-          db.addUser(username, '', hash, salt);
-          callback(true, null, db.getUser(username));
+          db.addUser(username, '', hash, salt)
+            .then(user => callback(true, null, user));
         }
       });
     }

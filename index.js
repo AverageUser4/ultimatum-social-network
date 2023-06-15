@@ -1,8 +1,9 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 const express = require('express');
 const session = require('express-session');
-const hash = require('pbkdf2-password')();
-const db = require('./misc/database');
+const expressLayouts = require('express-ejs-layouts');
+const addExampleData = require('./misc/addExampleData');
 const PORT = Number(process.env.PORT) || 3000;
 const rootRouter = require('./routes/root');
 const loginRouter = require('./routes/login');
@@ -20,6 +21,7 @@ app.use(session({
   saveUninitialized: false,
   secret: 'super secret'
 }));
+app.use(expressLayouts)
 app.use(rootRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
@@ -27,17 +29,14 @@ app.use('/logout', logoutRouter);
 app.use('/posts', postsRouter);
 app.use('/users', usersRouter);
 app.use((req, res) => {
-  res.render('_template', { main: '404', user: req.session.user });
+  res.render('404', { user: req.session.user });
 });
 
-// create example user and post
-hash({ password: 'nimda' }, (err, pass, salt, hash) => {
-  if(err) {
-    throw err;
-  }
+const dbLink = 'mongodb://127.0.0.1/expressApp';
+mongoose.connect(dbLink)
+  .then(() => console.log(`Successfully connected to database at: ${dbLink}`))
+  .catch((error) => console.error('Error when connecting to database', error));
 
-  db.addUser('admin', 'Owner of this site.', hash, salt);
-  db.addPost(db.users[0].id, 'This website is amazing!', 'This is literally the best social network EVER!');
-});
+addExampleData();
 
 app.listen(PORT, () => console.log(`Server listening at http://localhost:${PORT}.`));

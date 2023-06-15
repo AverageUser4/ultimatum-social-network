@@ -8,7 +8,7 @@ router.route('/')
     if(!req.session.user) {
       res.redirect('/login');
     } else {
-      res.render('_template', { main: 'posts', user: req.session.user, posts: db.getFormattedPosts() });
+      res.render('posts', { user: req.session.user, posts: db.getFormattedPosts() });
     }
   })
   .post((req, res) => {
@@ -17,9 +17,9 @@ router.route('/')
     } else {
       addPost(req.session.userId, req.body.title, req.body.content, (isSuccess, message) => {
         if(!isSuccess) {
-          res.render('_template', { error: message, main: 'posts', user: req.session.user, posts: db.getFormattedPosts() });
+          res.render('posts', { error: message, user: req.session.user, posts: db.getFormattedPosts() });
         } else {
-          res.render('_template', { success: 'Post added!', main: 'posts', user: req.session.user, posts: db.getFormattedPosts() });
+          res.render('posts', { success: 'Post added!', user: req.session.user, posts: db.getFormattedPosts() });
         }
       });
     }

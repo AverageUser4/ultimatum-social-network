@@ -1,8 +1,8 @@
-const db = require('./database');
+const User = require('../schemas/User');
 const hasher = require('pbkdf2-password')();
 
-function authenticate(username, password, callback) {
-  const user = db.getUser(username);
+async function authenticate(username, password, callback) {
+  const user = await User.findByName(username);
 
   if(!user) {
     callback(false, 'User with provided username does not exist in our database.')
@@ -14,7 +14,6 @@ function authenticate(username, password, callback) {
       console.error(err);
       callback(false, 'Internal server error.');
     } else if(hash !== user.hash) {
-      console.log('RETURNING INCORRECT PASSWORD');
       callback(false, 'Incorrect password.');
     } else {
       callback(true, null, user)

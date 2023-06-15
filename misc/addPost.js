@@ -1,4 +1,4 @@
-const db = require('./database');
+const Post = require('../schemas/Post');
 
 function addPost(authorId, title, content, callback) {
   if(!title) {
@@ -8,8 +8,8 @@ function addPost(authorId, title, content, callback) {
   } else if(authorId == undefined) {
     callback(false, 'You have to be logged in!');
   } else {
-    db.addPost(authorId, title, content);
-    callback(true, null);
+    Post.addPost(authorId, title, content)
+      .then(() => callback(true, null));
   }
 }
 
