@@ -5,7 +5,7 @@
   <p>Come see our cool <a href="/posts">posts</a> or <a href="/users">users</a></p>
 <% } else { %>
   <form method="post">
-    <input name="username" placeholder="username">
+    <input name="username" placeholder="username" value="<%= locals.username %>">
     <input type="password" name="password" placeholder="password">
     <button>submit</button>
   </form>

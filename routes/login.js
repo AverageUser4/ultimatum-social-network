@@ -11,7 +11,7 @@ router.route('/')
     const { username, password } = req.body;
     authenticate(username, password, (isSuccess, message, user) => {
       if(!isSuccess) {
-        res.render('login', { user: req.session.authUser, error: message });
+        res.render('login', { user: req.session.authUser, error: message, ...req.body });
       } else {
         loginUser(user, req, () => {
           console.log('logging user in', req.session)

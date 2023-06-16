@@ -1,8 +1,8 @@
 <h1>Ultimatum - Posts</h1>
 
 <form class="post-form" method="post">
-  <input name="title" placeholder="title">
-  <textarea name="content" placeholder="what are you thinking about..."></textarea>
+  <input name="title" placeholder="title" value="<%= locals.title %>">
+  <textarea name="content" placeholder="what are you thinking about..."><%= locals.content %></textarea>
   <button>add post</button>
   <% if(locals.error) { %>
     <p class="error"><%= locals.error %></p>

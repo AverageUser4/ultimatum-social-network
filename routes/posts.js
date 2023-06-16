@@ -1,4 +1,4 @@
-const db = require('../misc/database');
+const Post = require('../schemas/Post');
 const addPost = require('../misc/addPost');
 const express = require('express');
 const router = express.Router();
@@ -8,7 +8,10 @@ router.route('/')
     if(!req.session.authUser) {
       res.redirect('/login');
     } else {
-      res.render('posts', { user: req.session.authUser, posts: db.getFormattedPosts() });
+      Post.findAllPosts()
+        .then((posts) => {
+          res.render('posts', { user: req.session.authUser, posts });
+        });
     }
   })
   .post((req, res) => {
@@ -17,9 +20,15 @@ router.route('/')
     } else {
       addPost(req.session.authUserId, req.body.title, req.body.content, (isSuccess, message) => {
         if(!isSuccess) {
-          res.render('posts', { error: message, user: req.session.authUser, posts: db.getFormattedPosts() });
+          Post.findAllPosts()
+            .then((posts) => {
+              res.render('posts', { error: message, user: req.session.authUser, posts, ...req.body });
+            });
         } else {
-          res.render('posts', { success: 'Post added!', user: req.session.authUser, posts: db.getFormattedPosts() });
+          Post.findAllPosts()
+            .then((posts) => {
+              res.render('posts', { success: 'Post added!', error: message, user: req.session.authUser, posts });
+            });
         }
       });
     }

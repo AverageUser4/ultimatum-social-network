@@ -11,7 +11,7 @@ router.route('/')
     const { username, password, passwordRepeat } = req.body;
     createAccount(username, password, passwordRepeat, (isSuccess, message, user) => {
       if(!isSuccess) {
-        res.render('register', { error: message });
+        res.render('register', { error: message, ...req.body });
       } else {
         loginUser(user, req, () => {
           res.render('register', { user: req.session.authUser });

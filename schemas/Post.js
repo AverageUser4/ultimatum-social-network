@@ -32,4 +32,10 @@ postSchema.statics.findPostsByAuthorId = async function(id) {
   return posts;
 }
 
+postSchema.statics.findAllPosts = async function() {
+  const posts = await this.where().populate('author');
+  posts.reverse();
+  return posts;
+}
+
 module.exports = mongoose.model('Post', postSchema);
